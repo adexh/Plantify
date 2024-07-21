@@ -1,11 +1,11 @@
-import { create } from "zustand";
+import { atom } from "recoil";
 
-type useShowHideStoreType = {
-  initial: boolean;
-  toggle: () => void;
-};
+// export const useShowHideStore = atom({
+//   key: "navbarShowHideMenu",
+//   default: false,
+// });
 
-export const useShowHideStore = create<useShowHideStoreType>((set) => ({
-  initial: false,
-  toggle: () => set((state) => ({ initial: !state.initial })),
-}));
+export const userObject = atom({
+  key: "userObjectAtom",
+  default: {},
+});

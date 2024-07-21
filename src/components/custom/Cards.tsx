@@ -47,7 +47,7 @@ export default function Component() {
     },
   ];
   return (
-    <section className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 md:p-6">
+    <section className="grid grid-cols-1 gap-6 p-4 md:grid-cols-2 lg:grid-cols-3 md:p-6 md:mx-12">
       {imageArray.map((item: imageArrayType, index: number) => (
         <>
           <div className="relative overflow-hidden rounded-lg group">

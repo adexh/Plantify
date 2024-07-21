@@ -1,98 +1,27 @@
-// "use client";
-
+import { FiLogIn } from "react-icons/fi";
 import { FaLeaf } from "react-icons/fa";
-// import { IoMdMenu } from "react-icons/io";
-// import { Button } from "../ui/button";
-// import { RxCross1 } from "react-icons/rx";
-// import { useShowHideStore } from "@/stateManagement/Stores";
-
-// export default function () {
-//   const { initial, toggle } = useShowHideStore();
-
-//   const links = [
-//     {
-//       name: "Home",
-//       href: "",
-//     },
-//     {
-//       name: "About",
-//       href: "",
-//     },
-//     {
-//       name: "Service",
-//       href: "",
-//     },
-//     {
-//       name: "Features",
-//       href: "",
-//     },
-//   ];
-
-//   return (
-//     <>
-//       <div className="bg-black duration-300  text-white h-16 flex lg:px-20 justify-between items-center">
-//         <div className=" flex gap-2 items-center p-4 ">
-//           <FaLeaf />
-//           Plantify
-//         </div>
-//         {/* <button className="px-4" onClick={() => setinitialMenu(!initial)}> */}
-//         {/* </div> */}
-//         <div className="md:hidden">
-//           <Button onClick={toggle} className="hover:bg-slate-800 bg-black">
-//             {initial ? <RxCross1 size={25} /> : <IoMdMenu size={25} />}
-//           </Button>
-//         </div>
-//         <div className="hidden md:block">
-//           <div className="flex flex-row gap-2 p-2 ">
-//             {links.map((obj: { name: string; href: string }, index: number) => (
-//               <Button
-//                 className="hover:bg-slate-800 bg-black font-medium"
-//                 key={index}
-//               >
-//                 {obj.name}
-//               </Button>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//       <div
-//         className={`relative md:hidden w-full duration-500   ${
-//           initial ? "top-0" : "top-[-80rem]"
-//         } `}
-//       >
-//         <div className="p-2 bg-black text-white flex items-center justify-center flex-col">
-//           {links.map((obj: { name: string; href: string }, index: number) => (
-//             <Button
-//               key={index}
-//               className="flex items-center justify-center p-2 w-[40%] bg-black hover:bg-gray-800 font-medium"
-//             >
-//               {obj.name}
-//             </Button>
-//           ))}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
 import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { SVGProps } from "react";
-
-export default function Component() {
+import ThemeSwitcher from "./ThemeSwitcher";
+import { getServerSession } from "next-auth";
+export default async function Component() {
+  const user = await getServerSession();
+  console.log(user);
   return (
     <header className="bg-background sticky top-0 z-40 w-full border-b border-b-muted/20 px-4 py-3 md:px-6 md:py-4">
       <div className="container mx-auto flex items-center justify-between">
-        <Link href="#" className="flex items-center gap-2" prefetch={false}>
-          <div className=" flex gap-2 items-center p-4 ">
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+          <div className="font-bold flex gap-2 items-center p-4 ">
             <FaLeaf />
             Plantify
           </div>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
+          <ThemeSwitcher />
           <Link
-            href="#"
+            href="/"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
             // data-active={window.location.pathname === "/"}
             prefetch={false}
@@ -122,6 +51,14 @@ export default function Component() {
             prefetch={false}
           >
             Contact
+          </Link>{" "}
+          <Link
+            href="/pages/signin"
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+            // data-active={window.location.pathname === "/contact"}
+            prefetch={false}
+          >
+            Login{" "}
           </Link>
         </nav>
         <Sheet>
@@ -134,7 +71,7 @@ export default function Component() {
           <SheetContent side="right" className="w-full max-w-xs">
             <div className="grid gap-4 p-4">
               <Link
-                href="#"
+                href="/"
                 className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
                 // data-active={window.location.pathname === "/"}
                 prefetch={false}
@@ -168,7 +105,17 @@ export default function Component() {
               >
                 <ContactIcon className="h-5 w-5" />
                 Contact
+              </Link>{" "}
+              <Link
+                href="/pages/signin"
+                className="text-sm flex gap-2 font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+                // data-active={window.location.pathname === "/contact"}
+                prefetch={false}
+              >
+                <FiLogIn size={20} />
+                Login{" "}
               </Link>
+              <ThemeSwitcher />
             </div>
           </SheetContent>
         </Sheet>

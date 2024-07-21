@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import Github from "next-auth/providers/github";
 
 const handler = NextAuth({
   providers: [
@@ -16,9 +17,9 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         return {
-          id: "adfasd",
-          username: "Piyush",
-          password: "asdfas",
+          id: String(Math.floor(Math.random() * 100)),
+          username: credentials?.username,
+          password: credentials?.password,
         };
       },
     }),
@@ -26,8 +27,17 @@ const handler = NextAuth({
       clientId: "asdf",
       clientSecret: "adfadf",
     }),
+    Github({
+      clientId: "",
+      clientSecret: "",
+    }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+      return baseUrl;
+    },
+  },
 });
 
 export const GET = handler;

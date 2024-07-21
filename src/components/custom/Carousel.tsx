@@ -133,7 +133,7 @@ export default function Component() {
   ];
   return (
     <Carousel
-      className="w-full max-w-7xl md:ml-20 w-full"
+      className="w-full lg:max-w-7xl md:max-w-4xl md:ml-20 w-full m-5"
       opts={{ loop: true }}
     >
       <CarouselContent>
