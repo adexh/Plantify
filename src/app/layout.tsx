@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { cn } from "@/lib/utils";
+import Providers from "@/providers/Providers";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,8 +28,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Toaster position="top-center" reverseOrder={false} />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
