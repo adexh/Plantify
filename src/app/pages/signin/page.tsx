@@ -7,7 +7,7 @@ import { z } from "zod";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import { IoLogoGithub } from "react-icons/io";
-import { JSX, SVGProps } from "react";
+import { JSX, MouseEvent, SVGProps } from "react";
 import {
   Form,
   FormControl,
@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formSchema } from "@/schema/zodValidationSchema";
-import Image from "next/image";
 import Navbar from "@/components/custom/Navbar";
 import { IconContext } from "react-icons/lib";
 
@@ -33,10 +32,20 @@ export default function ProfileForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
+
+  function googleSignInHandler(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    return signIn("google");
+  }
+
+  function githubSignInHandler(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    return signIn("google");
+  }
 
   return (
     <>
@@ -47,7 +56,7 @@ export default function ProfileForm() {
             Create an account
           </h1>
           <p className="text-gray-400 p-3 text-sm text-center">
-            Enter your username and password below to create an account
+            Enter your email and password below to create an account
           </p>
           <div className="pt-4 ">
             <Form {...form}>
@@ -57,13 +66,13 @@ export default function ProfileForm() {
               >
                 <FormField
                   control={form.control}
-                  name="username"
+                  name="email"
                   render={({ field }) => (
                     <FormItem>
                       {/* <FormLabel>Username</FormLabel> */}
                       <FormControl>
                         <Input
-                          placeholder="John Doe"
+                          placeholder="Enter email"
                           {...field}
                           autoFocus
                           // autoComplete="email"
@@ -82,13 +91,34 @@ export default function ProfileForm() {
                     <FormItem>
                       {/* <FormLabel>Password</FormLabel> */}
                       <FormControl>
-                        <Input
+                        {/* <Input
                           placeholder="12345678"
                           type="password"
-                          // autoComplete="password"
+                          autoComplete="password"
                           className="block w-full appearance-none rounded-md border border-input bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
                           {...field}
-                        />
+                        /> */}
+                        <div className="relative">
+                          <Input
+                            id="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            autoComplete="password"
+                            className="block w-full appearance-none rounded-md border border-input bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
+                            {...field}
+                          />
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute top-1/2 right-2 -translate-y-1/2"
+                            // onClick={}
+                          >
+                            <EyeIcon className="h-5 w-5" />
+                            <span className="sr-only">
+                              Toggle password visibility
+                            </span>
+                          </Button>
+                        </div>
                       </FormControl>
                       {/* <FormDescription>
                   This is your public display name.
@@ -101,22 +131,22 @@ export default function ProfileForm() {
                   <Button
                     type="submit"
                     variant={"secondary"}
-                    className="w-full mt-3  font-bold flex w-full justify-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                    className="w-full mt-3  font-bold flex justify-center rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   >
-                    Register
+                    Login
                   </Button>
                 </div>
               </form>
             </Form>
-            <div className="flex items-center justify-center">
+            {/* <div className="flex items-center justify-center">
               <div className="w-[23%] border h-0"></div>
               <div className="px-2">or continue with</div>
               <div className="w-[22%] border h-0"></div>
-            </div>
-            <div className="flex gap-10">
+            </div> */}
+            {/* <div className="flex gap-10">
               <Button
-                className="w-full mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md border border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                onClick={() => signIn("google")}
+                className="mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md  border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                onClick={(e) => googleSignInHandler(e)}
               >
                 <IconContext.Provider value={{ size: "25" }}>
                   <div className="px-2">
@@ -126,8 +156,8 @@ export default function ProfileForm() {
                 Google
               </Button>
               <Button
-                className="w-full mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md border border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                onClick={() => signIn("github")}
+                className="mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                onClick={(e) => githubSignInHandler(e)}
               >
                 <IconContext.Provider value={{ size: "25" }}>
                   <div className="px-2">
@@ -136,7 +166,7 @@ export default function ProfileForm() {
                 </IconContext.Provider>
                 Github
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>{" "}
       </div>
@@ -274,6 +304,25 @@ export default function ProfileForm() {
         <line x1="21.17" x2="12" y1="8" y2="8" />
         <line x1="3.95" x2="8.54" y1="6.06" y2="14" />
         <line x1="10.88" x2="15.46" y1="21.94" y2="14" />
+      </svg>
+    );
+  }
+  function EyeIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+    return (
+      <svg
+        {...props}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
       </svg>
     );
   }

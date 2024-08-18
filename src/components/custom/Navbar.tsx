@@ -4,123 +4,103 @@ import Link from "next/link";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { SVGProps } from "react";
-import ThemeSwitcher from "./ThemeSwitcher";
-import { getServerSession } from "next-auth";
-export default async function Component() {
-  const user = await getServerSession();
-  console.log(user);
+import LoginButton from "./LoginButton";
+import User from "./User";
+import { useSession } from "next-auth/react";
+import { ModeToggle } from "./ThemeSwitcher";
+
+export default function Component() {
   return (
-    <header className="bg-background sticky top-0 z-40 w-full border-b border-b-muted/20 px-4 py-3 md:px-6 md:py-4">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
-          <div className="font-bold flex gap-2 items-center p-4 ">
-            <FaLeaf />
-            Plantify
-          </div>
-        </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          <ThemeSwitcher />
-          <Link
-            href="/"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-            // data-active={window.location.pathname === "/"}
-            prefetch={false}
-          >
-            Home
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-            // data-active={window.location.pathname === "/about"}
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-            // data-active={window.location.pathname === "/services"}
-            prefetch={false}
-          >
-            Services
-          </Link>
-          <Link
-            href="#"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-            // data-active={window.location.pathname === "/contact"}
-            prefetch={false}
-          >
-            Contact
-          </Link>{" "}
-          <Link
-            href="/pages/signin"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-            // data-active={window.location.pathname === "/contact"}
-            prefetch={false}
-          >
-            Login{" "}
-          </Link>
-        </nav>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <MenuIcon className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-full max-w-xs">
-            <div className="grid gap-4 p-4">
-              <Link
-                href="/"
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-                // data-active={window.location.pathname === "/"}
-                prefetch={false}
-              >
-                <HomeIcon className="h-5 w-5" />
-                Home
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-                // data-active={window.location.pathname === "/about"}
-                prefetch={false}
-              >
-                <InfoIcon className="h-5 w-5" />
-                About
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-                // data-active={window.location.pathname === "/services"}
-                prefetch={false}
-              >
-                <ServerIcon className="h-5 w-5" />
-                Services
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-                // data-active={window.location.pathname === "/contact"}
-                prefetch={false}
-              >
-                <ContactIcon className="h-5 w-5" />
-                Contact
-              </Link>{" "}
-              <Link
-                href="/pages/signin"
-                className="text-sm flex gap-2 font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
-                // data-active={window.location.pathname === "/contact"}
-                prefetch={false}
-              >
-                <FiLogIn size={20} />
-                Login{" "}
-              </Link>
-              <ThemeSwitcher />
+    <>
+      <header className="bg-background sticky top-0 z-40 w-full border-b border-b-muted/20 px-4 py-3 md:px-6 md:py-4">
+        <div className="container mx-auto flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="font-bold flex gap-2 items-center p-4 ">
+              <FaLeaf />
+              Plantify
             </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </header>
+          </Link>
+          <nav className="hidden items-center gap-6 md:flex">
+            <ModeToggle />
+            <Link
+              href="/"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+              // data-active={window.location.pathname === "/"}
+            >
+              Home
+            </Link>
+            <Link
+              href="/pages/explore"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+              // data-active={window.location.pathname === "/about"}
+            >
+              Explore
+            </Link>
+            <Link
+              href="#"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+              // data-active={window.location.pathname === "/services"}
+            >
+              Services
+            </Link>
+            <Link
+              href="#"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+              // data-active={window.location.pathname === "/contact"}
+            >
+              Contact
+            </Link>{" "}
+            <LoginButton />
+          </nav>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" className="md:hidden">
+                <MenuIcon className="h-6 w-6" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full max-w-xs">
+              <div className="grid gap-4 p-4">
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+                  // data-active={window.location.pathname === "/"}
+                >
+                  <HomeIcon className="h-5 w-5" />
+                  Home
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+                  // data-active={window.location.pathname === "/about"}
+                >
+                  <InfoIcon className="h-5 w-5" />
+                  About
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+                  // data-active={window.location.pathname === "/services"}
+                >
+                  <ServerIcon className="h-5 w-5" />
+                  Services
+                </Link>
+                <Link
+                  href="#"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground data-[active=true]:font-semibold"
+                  // data-active={window.location.pathname === "/contact"}
+                >
+                  <ContactIcon className="h-5 w-5" />
+                  Contact
+                </Link>{" "}
+                <ModeToggle />
+                <LoginButton />
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+    </>
   );
 }
 

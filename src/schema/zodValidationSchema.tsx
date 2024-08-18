@@ -1,7 +1,7 @@
 import { z } from "zod";
 export const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  email: z.string().email({
+    message: "Enter a valid email address",
   }),
   password: z.string().min(4, {
     message: "Password must be at least 4 characters.",

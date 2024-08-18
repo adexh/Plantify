@@ -8,7 +8,7 @@ const handler = NextAuth({
     Credentials({
       name: "credentials",
       credentials: {
-        username: { label: "username", placeholder: "Username", type: "text" },
+        email: { label: "email", placeholder: "Email", type: "text" },
         password: {
           label: "password",
           placeholder: "password",
@@ -17,26 +17,32 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         return {
-          id: String(Math.floor(Math.random() * 100)),
-          username: credentials?.username,
+          id: String(Math.floor(Math.random() * 1000)),
+          email: credentials?.email,
           password: credentials?.password,
         };
       },
     }),
-    Google({
-      clientId: "asdf",
-      clientSecret: "adfadf",
-    }),
-    Github({
-      clientId: "",
-      clientSecret: "",
-    }),
+    // Google({
+    //   clientId: process.env.GOOGLE_CLIENT_ID || "",
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    // }),
+    // Github({
+    //   clientId: "",
+    //   clientSecret: "",
+    // }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "mysecpassword",
   callbacks: {
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       return baseUrl;
     },
+    async session({ session, user, token }) {
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/pages/signin",
   },
 });
 

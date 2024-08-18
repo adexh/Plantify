@@ -1,14 +1,26 @@
 "use client";
-import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
 import HotToastProvider from "./HotToastProvider";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "@/components/custom/ThemeProvider";
+import store from "@/store";
+import SProvider from "./SessionProvider";
 
-export default function ({ children }: { children: ReactNode }) {
+export default function Providers({ children }: { children: ReactNode }) {
   return (
     <>
-      <SessionProvider>
-        <HotToastProvider>{children}</HotToastProvider>
-      </SessionProvider>
+      <Provider store={store}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SProvider>
+            <HotToastProvider>{children}</HotToastProvider>
+          </SProvider>
+        </ThemeProvider>
+      </Provider>
     </>
   );
 }
