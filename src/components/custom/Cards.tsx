@@ -51,7 +51,7 @@ export default function Component() {
       {imageArray.map((item: imageArrayType, index: number) => (
         <>
           <div
-            key={item.heading}
+            key={item.content}
             className="relative overflow-hidden rounded-lg group"
           >
             <Link href="#" className="absolute inset-0 z-10" prefetch={false}>
