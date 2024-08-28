@@ -13,9 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 export default function PlantInfo({ params }: { params: { plantId: number } }) {
   const { plantId } = params;
-  if (!plantId) {
-    return <div>Page not found</div>;
-  }
   const plant = AllItems.find((I) => I.id == Number(plantId));
   const remaining = AllItems.filter((I) => I.id !== Number(plantId)).slice(
     0,
@@ -34,7 +31,9 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
   const cartItems = useSelector(
     (state: RootState) => state.cartItems.cartItems
   );
-  const navigate = useRouter();
+  if (!plantId) {
+    return <div>Page not found</div>;
+  }
 
   if (plant) {
     return (
