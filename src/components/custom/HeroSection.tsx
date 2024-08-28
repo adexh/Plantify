@@ -1,6 +1,7 @@
 import { img3 } from "@/Images/ExportImages";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function Component() {
   return (
@@ -19,12 +20,9 @@ export default function Component() {
           Immerse yourself in the breathtaking landscapes of our world, from
           towering mountains to serene coastlines.
         </p>
-        <Link
-          href="pages/explore"
-          className="inline-flex h-10 items-center justify-center rounded-md bg-white text-primary/90 px-8 text-sm font-medium dark:bg-black dark:text-white shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-        >
-          Explore Now
-        </Link>
+        <Button size={"lg"} variant={"default"}>
+          <Link href="pages/explore">Explore Now</Link>
+        </Button>
       </div>
     </section>
   );
