@@ -26,7 +26,7 @@ export default function Home() {
           <div className="w-4/5 flex flex-wrap gap-5 items-center justify-center pb-5 p-1">
             {items.length > 0 ? (
               items.map((I: ItemsType) => (
-                <div key={I.description}>
+                <div key={I.id}>
                   <Link href={`explore/${I.id}`}>
                     <PlantCard plant={I} />
                   </Link>

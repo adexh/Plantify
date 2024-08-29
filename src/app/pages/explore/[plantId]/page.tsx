@@ -105,7 +105,7 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
           <div className="flex gap-4 h-[50%]">
             {remaining.map((I) => (
               <div
-                key={I.description}
+                key={I.image}
                 className="cursor-pointer"
                 onClick={() => router.push(`/pages/explore/${I.id}`)}
               >
