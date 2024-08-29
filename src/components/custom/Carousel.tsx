@@ -133,7 +133,7 @@ export default function Component() {
   ];
   return (
     <Carousel
-      className="w-full lg:max-w-7xl md:max-w-4xl md:ml-20 w-full m-5"
+      className="w-full lg:max-w-7xl md:max-w-4xl md:ml-20  m-5"
       opts={{ loop: true }}
     >
       <CarouselContent>
@@ -145,7 +145,7 @@ export default function Component() {
                 <Image
                   src={item.image}
                   alt="slide 1 image"
-                  // height={100}
+                  height={300}
                   width={1100}
                   className="rounded-lg object-cover aspect-video"
                 />

@@ -33,7 +33,7 @@ export default function Component() {
     {
       image: img6,
       heading: "Cozy Cabin Getaway",
-      content: "Escape the city and unwind in a charming mountain cabin.",
+      content: "Escape the city and unwind in a charming mountain cabin .",
     },
     {
       image: img7,
@@ -43,7 +43,7 @@ export default function Component() {
     {
       image: img8,
       heading: "Cozy Cabin Getaway",
-      content: "Escape the city and unwind in a charming mountain cabin.",
+      content: "Escape the city and unwind in a charming mountain  cabin.",
     },
   ];
   return (
@@ -51,7 +51,7 @@ export default function Component() {
       {imageArray.map((item: imageArrayType, index: number) => (
         <>
           <div
-            key={item.content}
+            key={`${item.image}+${Math.random() * 1000}`}
             className="relative overflow-hidden rounded-lg group"
           >
             <Link href="#" className="absolute inset-0 z-10" prefetch={false}>
@@ -63,6 +63,7 @@ export default function Component() {
               width={400}
               height={300}
               className="object-cover w-full h-60"
+              aria-describedby={String(item.image)}
             />
             <div className="p-4 bg-background">
               <h3 className="text-lg font-semibold md:text-xl">
