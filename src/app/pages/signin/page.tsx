@@ -11,8 +11,10 @@ import { JSX, MouseEvent, SVGProps } from "react";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -69,17 +71,16 @@ export default function ProfileForm() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      {/* <FormLabel>Username</FormLabel> */}
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Enter email"
                           {...field}
                           autoFocus
-                          // autoComplete="email"
+                          autoComplete="email"
                           className="block w-full appearance-none rounded-md border border-input bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
                         />
                       </FormControl>
-                      {/* <FormDescription>Enter your user name here</FormDescription> */}
                       <FormMessage />
                     </FormItem>
                   )}
@@ -89,15 +90,8 @@ export default function ProfileForm() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      {/* <FormLabel>Password</FormLabel> */}
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
-                        {/* <Input
-                          placeholder="12345678"
-                          type="password"
-                          autoComplete="password"
-                          className="block w-full appearance-none rounded-md border border-input bg-background px-3 py-2 placeholder-muted-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm"
-                          {...field}
-                        /> */}
                         <div className="relative">
                           <Input
                             id="password"
@@ -120,9 +114,7 @@ export default function ProfileForm() {
                           </Button>
                         </div>
                       </FormControl>
-                      {/* <FormDescription>
-                  This is your public display name.
-                </FormDescription> */}
+
                       <FormMessage />
                     </FormItem>
                   )}
@@ -138,12 +130,12 @@ export default function ProfileForm() {
                 </div>
               </form>
             </Form>
-            {/* <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center opacity-10">
               <div className="w-[23%] border h-0"></div>
               <div className="px-2">or continue with</div>
               <div className="w-[22%] border h-0"></div>
-            </div> */}
-            {/* <div className="flex gap-10">
+            </div>
+            <div className="flex gap-10">
               <Button
                 className="mt-3 border border-gray-700 flex w-full items-center justify-center rounded-md  border-input bg-white dark:bg-white px-3 py-2 text-sm font-semibold text-muted-foreground text-black shadow-sm transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 onClick={(e) => googleSignInHandler(e)}
@@ -166,7 +158,7 @@ export default function ProfileForm() {
                 </IconContext.Provider>
                 Github
               </Button>
-            </div> */}
+            </div>
           </div>
         </div>{" "}
       </div>
