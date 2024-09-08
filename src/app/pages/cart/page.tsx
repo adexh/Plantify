@@ -1,4 +1,3 @@
-// pages/cart.js
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
