@@ -27,7 +27,7 @@ export default function Home() {
             {items.length > 0 ? (
               items.map((I: ItemsType) => (
                 <div key={I.id}>
-                  <Link href={`explore/${I.id}`}>
+                  <Link href={`/pages/explore/${I.id}`}>
                     <PlantCard plant={I} />
                   </Link>
                 </div>
