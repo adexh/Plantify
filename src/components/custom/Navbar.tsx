@@ -8,11 +8,12 @@ import LoginButton from "./LoginButton";
 import User from "./User";
 import { useSession } from "next-auth/react";
 import { ModeToggle } from "./ThemeSwitcher";
+import CartButton from "./CartButton";
 
 export default function Component() {
   return (
     <>
-      <header className="bg-background sticky top-0 z-40 w-full border-b border-b-muted/20 px-4 py-3 md:px-6 md:py-4">
+      <div className="bg-background sticky top-0 z-40 w-full border-b border-b-muted/20 px-4 py-3 md:px-6 md:py-4">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="font-bold flex gap-2 items-center p-4 ">
@@ -50,6 +51,7 @@ export default function Component() {
             >
               Contact
             </Link>{" "}
+            <CartButton />
             <LoginButton />
           </nav>
           <Sheet>
@@ -93,13 +95,14 @@ export default function Component() {
                   <ContactIcon className="h-5 w-5" />
                   Contact
                 </Link>{" "}
+                <CartButton />
                 <ModeToggle />
                 <LoginButton />
               </div>
             </SheetContent>
           </Sheet>
         </div>
-      </header>
+      </div>
     </>
   );
 }

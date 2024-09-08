@@ -21,7 +21,7 @@ export default function Component() {
           towering mountains to serene coastlines.
         </p>
         <Button size={"lg"} variant={"default"}>
-          <Link href="pages/explore">Explore Now</Link>
+          <Link href="/pages/explore">Explore Now</Link>
         </Button>
       </div>
     </section>
