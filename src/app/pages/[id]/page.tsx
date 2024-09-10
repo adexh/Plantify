@@ -119,3 +119,5 @@ function StarIcon(props: any) {
     </svg>
   );
 }
+
+export const dynamicParams = true
