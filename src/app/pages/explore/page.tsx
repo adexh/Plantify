@@ -10,8 +10,10 @@ import { ItemsType } from "@/types/itemsType";
 import { RootState } from "@/store";
 import { Sidebar } from "@/components/custom/Sidebar";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   const items = useSelector(
     (state: RootState) => state.filteredItem.FilterItems
   );
@@ -27,9 +29,9 @@ export default function Home() {
             {items.length > 0 ? (
               items.map((I: ItemsType) => (
                 <div key={I.id}>
-                  <Link href={`/pages/${I.id}`}>
+                  <button onClick={() => router.push(`/pages/${I.id}`)}>  
                     <PlantCard plant={I} />
-                  </Link>
+                  </button>
                 </div>
               ))
             ) : (
