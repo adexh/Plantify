@@ -1,4 +1,3 @@
-"use client";
 import { AllItems } from "@/assets/Items";
 import { PlantCard } from "@/components/custom/Explore-page-cart";
 import Navbar from "@/components/custom/Navbar";
