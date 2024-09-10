@@ -4,15 +4,15 @@ import Navbar from "@/components/custom/Navbar";
 import { Button } from "@/components/ui/button";
 import { Badge, Link } from "lucide-react";
 import Image from "next/image";
-export default function PlantInfo({ params }: { params: { plantId: number } }) {
-  const { plantId } = params;
-  const plant = AllItems.find((I) => I.id == Number(plantId));
-  const remaining = AllItems.filter((I) => I.id !== Number(plantId)).slice(
+export default function PlantInfo({ params }: { params: { id: number } }) {
+  const { id } = params;
+  const plant = AllItems.find((I) => I.id == Number(id));
+  const remaining = AllItems.filter((I) => I.id !== Number(id)).slice(
     0,
     5
   );
 
-  if (!plantId) {
+  if (!id) {
     return <div>Page not found</div>;
   }
 
