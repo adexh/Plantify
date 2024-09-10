@@ -2,13 +2,8 @@ import { AllItems } from "@/assets/Items";
 import { PlantCard } from "@/components/custom/Explore-page-cart";
 import Navbar from "@/components/custom/Navbar";
 import { Button } from "@/components/ui/button";
-import { AddtoCart } from "@/store/Slices/CartItemSlice";
 import { Badge, Link } from "lucide-react";
 import Image from "next/image";
-import { MouseEvent } from "react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { RootState } from "@/store";
 export default function PlantInfo({ params }: { params: { plantId: number } }) {
   const { plantId } = params;
   const plant = AllItems.find((I) => I.id == Number(plantId));
@@ -16,7 +11,6 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
     0,
     5
   );
-  const router = useRouter();
 
   if (!plantId) {
     return <div>Page not found</div>;
@@ -95,7 +89,7 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
               <div
                 key={I.image}
                 className="cursor-pointer"
-                onClick={() => router.push(`/pages/explore/${I.id}`)}
+                onClick={() => (console.log("Added here"))}
               >
                 <PlantCard plant={I} />
               </div>
