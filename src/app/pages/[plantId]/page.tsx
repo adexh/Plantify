@@ -9,7 +9,6 @@ import Image from "next/image";
 import { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 export default function PlantInfo({ params }: { params: { plantId: number } }) {
   const { plantId } = params;
@@ -19,18 +18,7 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
     5
   );
   const router = useRouter();
-  const dispatch = useDispatch();
-  function handleAddToCart(
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-    id: number
-  ) {
-    e.preventDefault();
-    dispatch(AddtoCart(id));
-    toast.success("Item successfully added");
-  }
-  const cartItems = useSelector(
-    (state: RootState) => state.cartItems.cartItems
-  );
+
   if (!plantId) {
     return <div>Page not found</div>;
   }
@@ -80,7 +68,8 @@ export default function PlantInfo({ params }: { params: { plantId: number } }) {
                   </div>
                   <Button
                     size="lg"
-                    onClick={(e) => handleAddToCart(e, plant.id)}
+                    onClick={(e) => {console.log("Add to cart will work here");
+                    }}
                   >
                     Add to Cart
                   </Button>
